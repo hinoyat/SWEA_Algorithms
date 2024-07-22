@@ -15,10 +15,10 @@
 
 
 
-T = int(input())
+# T = int(input())
 
-for i in range(T):
-    s = input()
+# for i in range(T):
+#     s = input()
 
         
 
@@ -30,3 +30,17 @@ for i in range(T):
     # 처음부터 set 쓰지 말고 더하고 Set쓰고 하면서 갯수 세고
     # 필요한 변수 N에 곱하는 숫자
     # 몇번째인지 세는 카운트
+
+
+T=int(input())
+for tc in range(1, T+1):
+    N = int(input())
+    cnt = [0] * 10
+
+    value = '0'
+    while 0 in cnt:
+        value = str(int(value)+N)
+        for c in value:
+            cnt[int(c)] +=1
+
+print(f'#{tc} {value}')
