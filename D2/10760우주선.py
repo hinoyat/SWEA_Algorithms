@@ -5,15 +5,17 @@ for tc in range(1, T+1):
     arr = [list(map(int, input().split())) for _ in range(N)]
     # pprint(arr)
 
-
+# 델타    →  ↘  ↓  ↙   ←  ↖   ↑   ↗
     di = [0, 1, 1,  1,  0, -1, -1, -1]
     dj = [1, 1, 0, -1, -1, -1,  0,  1]
 
+    # 할 수 있다
     can = 0
     for i in range(N):
         for j in range(M):
             start_p = arr[i][j]
             cnt = 0
+            # 8번 머리 돌리기
             for d in range(8):
                 new_i = i + di[d]
                 new_j = j + dj[d]
@@ -22,6 +24,7 @@ for tc in range(1, T+1):
                 else:
                     if arr[new_i][new_j] < start_p:
                         cnt += 1
+            # 낮은 곳이 4개 이상이면 할 수 있다 +=1
             if cnt >= 4:
                 can += 1
 
