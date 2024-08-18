@@ -117,7 +117,7 @@ def color():
                         ar1[0][j] = '#'
                     else:
                         ar1[0][j] = '.'
-        # 나머지 칠하면서 확인하기 위에랑 다르게 색칠
+        # 나머지 위에 보면서 다른 색으로 칠하기
         if N >1:
             for i in range(1, N):
                 for j in range(M):
@@ -126,6 +126,7 @@ def color():
                             ar1[i][j] = '#'
                         else:
                             ar1[i][j] = '.'
+        # 확인하기
         for i in range(N):
             for j in range(M):
                 for d in range(4):
@@ -135,19 +136,18 @@ def color():
                         if ar1[newi][newj] == ar1[i][j]:
                             return 'impossible'
         return 'possible'
-    
 
-    # 여기는 첫 칸이 ?일때
-    
 
 T = int(input())
 for tc in range(1, T+1):
     N, M = map(int, input().split())
     arr = [list(input()) for _ in range(N)]
     c_lst = ['#','.']
+    # 첫 칸이 물음표가 아닐 때
     if arr[0][0] != '?':
         print(f'#{tc} {color()}')
     else:
+        # 물음표일 때 하나씩 채워보면서 확인하기
         result = []
         for c in c_lst:
             arr[0][0] = c
@@ -157,6 +157,6 @@ for tc in range(1, T+1):
             print(f'#{tc} possible')
         else:
             print(f'#{tc} impossible')
-    # 왼 오 위 아래 탐지하며 같지 않은 값을 대입
+
 
                     
