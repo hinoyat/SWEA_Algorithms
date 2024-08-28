@@ -1,9 +1,13 @@
 def change(m, d):
+    # 인덱스로 계산할거니 -1
     m -= 1
+    # 바뀌는지 안 바뀌는지 체크할 리스트
     change_d = [0, 0, 0, 0]
+    # 명령 들어온 것은 바로 바꾸기
     change_d[m] = d
     
-    
+    # 바꿀 자석의 인덱스에 따라서 함수를 순서대로 호출하기
+    # 호출한 결과를 위의 리스트에 넣어주기
     if m == 0:
         change_d[1] = checkNS(1, change_d[0], m)
         change_d[2] = checkNS(2, change_d[1], m)
@@ -25,7 +29,7 @@ def change(m, d):
 
 
 
-
+# 바뀔지 안 바뀔지 판단하는 함수
 def checkNS(idx, dir, m):
     if dir == 0:
         return 0
@@ -99,7 +103,7 @@ def checkNS(idx, dir, m):
             else:
                 return 0
 
-
+# 여기서 배열을 진짜 바꿔줍니다.
 def real_change(change_d):
     global arr
     for i in range(4):
@@ -134,13 +138,7 @@ for tc in range(1, T+1):
 
     for j in range(4):
         if arr[j][0] == 1:
-            if j == 0:
-                point += 1
-            elif j == 1:
-                point += 2
-            elif j == 2:
-                point += 4
-            elif j == 3:
-                point += 8
+            point += 2**j
+
             
     print(f'#{tc} {point}')
