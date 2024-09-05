@@ -12,9 +12,8 @@ def supernova(val, level, max_v):
         return
 
     # 더하거나 더하지 않거나
-    supernova(val + lst[level], level + 1, max_v)
-    supernova(val, level + 1, max_v)
-
+    supernova(val + lst[level], level + 1, max_v - lst[level])
+    supernova(val, level + 1, max_v - lst[level])
 
 
 
