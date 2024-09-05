@@ -140,36 +140,83 @@
 #                 DFS(i, j, max_v, start_len, 1)
 
 
-def DFS(i, j, cur_h, cur_len, visit):
+# def DFS(i, j, cur_h, cur_len, visit):
+#     global max_len
+#
+#     visited[i][j] = 1
+#
+#
+#     if cur_len > max_len:
+#         max_len = cur_len
+#
+#     for di, dj in [[0, 1], [1, 0], [-1, 0], [0, -1]]:
+#         ni = i + di
+#         nj = j + dj
+#
+#         if 0 <= ni < N and 0 <= nj < N and visited[ni][nj] == 0:
+#             if arr[ni][nj] < 0: continue
+#             if arr[ni][nj] < cur_h:
+#                 visited[ni][nj] = 1
+#                 DFS(ni, nj, arr[ni][nj], cur_len + 1, visit)
+#                 visited[ni][nj] = 0
+#             elif arr[ni][nj] - K < cur_h and visit == 0:
+#                 visited[ni][nj] = 1
+#                 DFS(ni, nj, cur_h - 1, cur_len + 1, 1)
+#                 visited[ni][nj] = 0
+#
+# T = int(input())
+# for tc in range(1, T + 1):
+#     N, K = map(int, input().split())
+#     arr = [list(map(int, input().split())) for _ in range(N)]
+#
+#     max_v = 0
+#     for i in range(N):
+#         for j in range(N):
+#             if arr[i][j] > max_v:
+#                 max_v = arr[i][j]
+#
+#     max_len = 0
+#
+#     start_len = 1
+#
+#     for i in range(N):
+#         for j in range(N):
+#             if arr[i][j] == max_v:
+#                 visited = [[0] * N for _ in range(N)]
+#                 DFS(i, j, max_v, start_len, 0)
+#
+#     print(f'#{tc} {max_len}')
+
+
+# si, sj - 현재 지점 cnt - 등산로 길이, cur 현재 높이, pos 깎은지 안 깎은지의 flag
+def supernova(si, sj, cnt, cur, pos):
     global max_len
 
-    visited[i][j] = 1
+    max_len = max(cnt, max_len)
 
-
-    if cur_len > max_len:
-        max_len = cur_len
-
-    for di, dj in [[0, 1], [1, 0], [-1, 0], [0, -1]]:
-        ni = i + di
-        nj = j + dj
-
+    for di, dj in ((0,1), (1, 0), (-1, 0), (0, -1)):
+        ni = si + di
+        nj = sj + dj
         if 0 <= ni < N and 0 <= nj < N and visited[ni][nj] == 0:
-            if arr[ni][nj] < 0: continue
-            if arr[ni][nj] < cur_h:
+            if arr[ni][nj] < cur:
                 visited[ni][nj] = 1
-                DFS(ni, nj, arr[ni][nj], cur_len + 1, visit)
+                supernova(ni, nj, cnt + 1, arr[ni][nj], pos)
                 visited[ni][nj] = 0
-            elif arr[ni][nj] - K < cur_h and visit == 0:
+            elif arr[ni][nj] - K < cur and pos == 0:
                 visited[ni][nj] = 1
-                DFS(ni, nj, cur_h - 1, cur_len + 1, 1)
+                supernova(ni, nj, cnt + 1, cur - 1, 1)
                 visited[ni][nj] = 0
+
+
+
 
 T = int(input())
-for tc in range(1, T + 1):
+for tc in range(1, T+1):
     N, K = map(int, input().split())
     arr = [list(map(int, input().split())) for _ in range(N)]
 
     max_v = 0
+
     for i in range(N):
         for j in range(N):
             if arr[i][j] > max_v:
@@ -177,13 +224,11 @@ for tc in range(1, T + 1):
 
     max_len = 0
 
-    start_len = 1
-
     for i in range(N):
         for j in range(N):
             if arr[i][j] == max_v:
-                visited = [[0] * N for _ in range(N)]
-                DFS(i, j, max_v, start_len, 0)
+                visited = [[0]*N for _ in range(N)]
+                visited[i][j] = 1
+                supernova(i, j, 1, max_v, 0)
 
     print(f'#{tc} {max_len}')
-
