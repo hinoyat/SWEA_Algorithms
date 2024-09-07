@@ -1,16 +1,9 @@
 '''
-1
-4 2 13
-6 1 9 7
-9 8 5 8
-3 4 5 3
-8 2 6 7
-1
-3 3 10
-7 2 9
-6 6 6
-5 5 7
+
 '''
+# import sys
+#
+# sys.stdin = open("input.txt", "r")
 def perm(lst):
     max_val = 0
     for i in range(len(lst)):
