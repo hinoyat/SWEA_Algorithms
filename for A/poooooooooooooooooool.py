@@ -54,4 +54,31 @@
 #     print(f'#{tc} {real_ans}')
 
 
+def supernova(level, total_price):
+    global real_ans
 
+    if total_price >= real_ans:
+        return
+
+    if level >= 12:
+        real_ans = min(total_price, real_ans)
+        return
+
+    # 1일
+    supernova(level + 1, total_price + (price[0] * plan[level]) )
+    # 1달
+    supernova(level + 1, total_price + price[1])
+    # 3개월
+    supernova(level + 3, total_price + price[2])
+
+
+T = int(input())
+for tc in range(1, T+1):
+    price = list(map(int, input().split()))
+    plan = list(map(int, input().split()))
+    real_ans = 21e8
+    supernova(0, 0)
+
+    real_ans = min(price[3], real_ans)
+
+    print(f'#{tc} {real_ans}')
