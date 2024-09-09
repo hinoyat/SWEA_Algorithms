@@ -13,8 +13,8 @@ for tc in range(1, T+1):
 
     ans = 0
 
-    time = 0
     # 접수 대기/ 정비 대기
+    # 번호랑 시간 체크
     desk_lst = [[0, 0] for _ in range(N)]
     repair_lst = [[0, 0] for _ in range(M)]
 
@@ -30,6 +30,7 @@ for tc in range(1, T+1):
     # A 왔다 B 온 사람 체크
     check = set()
 
+    time = 0
     while True:
         # 비어있을 때 고객이 도착하면 데스크에 올리기 올리는
         for dn, dv in enumerate(desk_lst):

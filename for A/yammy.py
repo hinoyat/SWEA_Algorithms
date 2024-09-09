@@ -94,6 +94,10 @@ def armageddon(i, j, cnt, direct, si, sj):
         ans = max(ans, cnt)
         return
 
+    if direct == 2:
+        if cnt * 2 <= ans:
+            return
+
     if arr[i][j] in check:
         return
 
